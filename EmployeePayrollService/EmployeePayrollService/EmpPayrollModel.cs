@@ -12,7 +12,7 @@ namespace EmployeePayrollService
         public float salary { get; set; }
         public  DateTime start { get; set; }
         public char gender { get; set; }
-        public string PhoneNo { get; set; }
+        public double PhoneNo { get; set; }
         public string OfficeAddress { get; set; }
         public string Department { get; set; }
         public double BasicPay { get; set; }
@@ -20,5 +20,6 @@ namespace EmployeePayrollService
         public double TaxablePay { get; set; }
         public double IncomeTax { get; set; }
         public double NetPay { get; set; }
+        public String Dept_id { get; set; }
     }
 }
