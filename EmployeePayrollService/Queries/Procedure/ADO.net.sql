@@ -1,6 +1,6 @@
 Use payroll_service
 
-Alter procedure AddPayRollService
+Create procedure AddPayRollService
 (
 @name varchar(250),
 @salary float,
@@ -81,7 +81,7 @@ ERROR_MESSAGE() as ErrorMassage;
 End catch
 
 
- Create procedure DeletePayrollServices	
+Create procedure DeletePayrollServices	
 (
  @id int
 )

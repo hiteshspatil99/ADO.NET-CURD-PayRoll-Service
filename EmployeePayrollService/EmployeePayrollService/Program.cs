@@ -13,6 +13,7 @@ namespace EmployeePayrollService
             {
                 Console.WriteLine("Select the number which is to be executed \n 1.ADD \n 2.Delete \n 3.Update  \n 4.View \n 5.Exit");
                 int choice = Convert.ToInt32(Console.ReadLine());
+                PayRollSqlConnection paysql = new PayRollSqlConnection();
                 switch (choice)
                 {
                     case 1:
@@ -32,7 +33,7 @@ namespace EmployeePayrollService
                         model.NetPay = 80000;
                         model.Dept_id = 1;
 
-                        PayRollSqlConnection paysql = new PayRollSqlConnection();
+                       
 
                         var result = paysql.AddEmployee(model);
 
@@ -44,6 +45,13 @@ namespace EmployeePayrollService
                         break;
 
                     case 2:
+                        Console.WriteLine("Enter the id To Delete Data");
+                        int num = Convert.ToInt32(Console.ReadLine());
+                        paysql.DeleteEmployee(num);
+                        break;
+
+
+                    case 3:
                         flag = false;
                         break;
                 }

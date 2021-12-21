@@ -132,7 +132,7 @@ namespace EmployeePayrollService
             try 
             {
                 Connection();
-                SqlCommand com = new SqlCommand("DeletePayrollServices	", con);
+                SqlCommand com = new SqlCommand("DeletePayrollServices", con);
 
                 com.CommandType = CommandType.StoredProcedure;
                 com.Parameters.AddWithValue("@id", id);
