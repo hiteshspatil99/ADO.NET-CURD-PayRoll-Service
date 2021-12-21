@@ -30,7 +30,7 @@ namespace EmployeePayrollService
                         model.TaxablePay = 400.45;
                         model.IncomeTax = 225.34;
                         model.NetPay = 80000;
-                        model.Dept_id = "SM001";
+                        model.Dept_id = 1;
 
                         PayRollSqlConnection paysql = new PayRollSqlConnection();
 

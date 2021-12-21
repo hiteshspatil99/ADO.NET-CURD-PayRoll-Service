@@ -1,8 +1,7 @@
 Use payroll_service
 
-Create procedure AddPayRollService
+Alter procedure AddPayRollService
 (
-@id int,
 @name varchar(250),
 @salary float,
 @start datetime,
@@ -20,7 +19,7 @@ Create procedure AddPayRollService
 as
 begin try
 
-Insert into employee_payroll Values (@id,@name,@salary,@start,@gender,@PhoneNo,@OfficeAddress,@Department,@Deductions,@TaxablePay,@IncomeTax,@NetPay,@Dept_id);
+Insert into employee_payroll (name,salary, start,gender,PhoneNo,OfficeAddress,Department,BasicPay,Deductions,TaxablePay,NetPay,Dept_id) Values (@name,@salary,@start,@gender,@PhoneNo,@OfficeAddress,@Department,@Deductions,@TaxablePay,@IncomeTax,@NetPay,@Dept_id);
 ---All are @ = dynamic values
 
 END TRY
@@ -33,7 +32,7 @@ BEGIN CATCH
 	
 END CATCH
 select * from employee_payroll
-
+select * from employee_Dept
 Create procedure GetPayrollServices	
 (
  @id int

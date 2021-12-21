@@ -7,7 +7,6 @@ namespace EmployeePayrollService
 {
     public class EmpPayrollModel
     {
-        public int id { get; set; }
         public string name { get; set; }
         public float salary { get; set; }
         public  DateTime start { get; set; }
@@ -20,6 +19,6 @@ namespace EmployeePayrollService
         public double TaxablePay { get; set; }
         public double IncomeTax { get; set; }
         public double NetPay { get; set; }
-        public String Dept_id { get; set; }
+        public int Dept_id { get; set; }
     }
 }

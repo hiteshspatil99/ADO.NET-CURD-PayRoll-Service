@@ -19,31 +19,41 @@ namespace EmployeePayrollService
         }
         public bool AddEmployee(EmpPayrollModel obj)
         {
-            Connection();
-            SqlCommand com = new SqlCommand("AddPayRollService", con);
-            com.CommandType = CommandType.StoredProcedure;
-            com.Parameters.AddWithValue("@name ", obj.name);
-            com.Parameters.AddWithValue("@salary ", obj.salary);
-            com.Parameters.AddWithValue("@start ", obj.start);
-            com.Parameters.AddWithValue("@gender ", obj.gender);
-            com.Parameters.AddWithValue("@PhoneNo ", obj.PhoneNo);
-            com.Parameters.AddWithValue("@OfficeAddress ", obj.OfficeAddress);
-            com.Parameters.AddWithValue("@Department ", obj.Department);
-            com.Parameters.AddWithValue("@BasicPay", obj.BasicPay);
-            com.Parameters.AddWithValue("@Deductions", obj.Deductions);
-            com.Parameters.AddWithValue("@TaxablePay", obj.TaxablePay);
-            com.Parameters.AddWithValue("@IncomeTax", obj.IncomeTax);
-            com.Parameters.AddWithValue("@NetPay", obj.NetPay);
-            com.Parameters.AddWithValue("@@Dept_id", obj.Dept_id);
+            try
+            {
+                Connection();
+                SqlCommand com = new SqlCommand("AddPayRollService", con);
+                com.CommandType = CommandType.StoredProcedure;
+                
+                com.Parameters.AddWithValue("@name ", obj.name);
+                com.Parameters.AddWithValue("@salary ", obj.salary);
+                com.Parameters.AddWithValue("@start ", obj.start);
+                com.Parameters.AddWithValue("@gender ", obj.gender);
+                com.Parameters.AddWithValue("@PhoneNo ", obj.PhoneNo);
+                com.Parameters.AddWithValue("@OfficeAddress ", obj.OfficeAddress);
+                com.Parameters.AddWithValue("@Department ", obj.Department);
+                com.Parameters.AddWithValue("@BasicPay", obj.BasicPay);
+                com.Parameters.AddWithValue("@Deductions", obj.Deductions);
+                com.Parameters.AddWithValue("@TaxablePay", obj.TaxablePay);
+                com.Parameters.AddWithValue("@IncomeTax", obj.IncomeTax);
+                com.Parameters.AddWithValue("@NetPay", obj.NetPay);
+                com.Parameters.AddWithValue("@Dept_id", obj.Dept_id);
 
-            con.Open();
-            int i = com.ExecuteNonQuery();
-            con.Close();
+                con.Open();
+                int i = com.ExecuteNonQuery();
+                con.Close();
 
-            if (i >= 1)
-                return true;
-            else
-                return false;
+                if (i >= 1)
+                    return true;
+                else
+                    return false;
+
+            }
+            catch (Exception e)
+            {
+
+                throw new Exception(e.Message);
+            }
         }
         //To view employee details with generic list     
         public List<EmpPayrollModel> GetAllEmployees()
