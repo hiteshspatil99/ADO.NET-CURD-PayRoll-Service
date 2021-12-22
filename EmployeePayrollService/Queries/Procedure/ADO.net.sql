@@ -51,27 +51,27 @@ ERROR_LINE() as ErrorLine,
 ERROR_MESSAGE() as ErrorMassage;
 End catch
 
-Create procedure UpdatePayrollServices
-(@name varchar(250),
+alter procedure UpdatePayrollServices(
+@name varchar(250),
 @salary float,
 @start datetime,
-@gender varchar(1),
-@PhoneNo bigint,
-@OfficeAddress varchar(200),
-@Department varchar(200),
-@BasicPay money,
-@Deductions money,
-@TaxablePay money,
-@IncomeTax money,
-@NetPay money,
-@Dept_id int
+@gender varchar(1)
+--@PhoneNo bigint,
+--@OfficeAddress varchar(200),
+--@Department varchar(200),
+--@BasicPay money,
+--@Deductions money,
+--@TaxablePay money,
+--@IncomeTax money,
+--@NetPay money,
+--@Dept_id int
 )
 as
 begin try
-      UPDATE employee_payroll SET name=@name, salary= @salary ,start = @start, gender=@gender,PhoneNo= @PhoneNo,OfficeAddress=@OfficeAddress,Department=@Department,BasicPay=@BasicPay,Deductions=@Deductions,TaxablePay= @TaxablePay,IncomeTax=@IncomeTax,NetPay=@NetPay Where Dept_id= @Dept_id
+      UPDATE employee_payroll set salary= @salary ,start = @start, gender=@gender where name=@name --PhoneNo= @PhoneNo,OfficeAddress=@OfficeAddress,Department=@Department,BasicPay=@BasicPay,Deductions=@Deductions,TaxablePay= @TaxablePay,IncomeTax=@IncomeTax,NetPay=@NetPay Where Dept_id= @Dept_id
 	 
 end try
-Begin Catch
+Begin Catch 
 Select
 ERROR_NUMBER() as ErrorNumber,
 ERROR_STATE() as ErrorState,

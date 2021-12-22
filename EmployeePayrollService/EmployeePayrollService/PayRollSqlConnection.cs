@@ -78,6 +78,7 @@ namespace EmployeePayrollService
                     {
 
                         name = Convert.ToString(dr["name"]),
+                        salary = (float)Convert.ToDouble(dr["salary"]),
                         start = Convert.ToDateTime(dr["start"]),
                         gender = Convert.ToChar(dr["gender"]),
                         PhoneNo = Convert.ToDouble(dr["PhoneNo"]),
@@ -95,7 +96,7 @@ namespace EmployeePayrollService
             return PayrollList;
         }
         //To Update Employee details    
-        public bool UpdateEmployee(EmpPayrollModel obj)
+        public bool UpdateEmployee(string name, DateTime start,float salary, char gender)
         {
             try
             {
@@ -103,10 +104,11 @@ namespace EmployeePayrollService
                 SqlCommand com = new SqlCommand("UpdatePayrollServices", con);
 
                 com.CommandType = CommandType.StoredProcedure;
-                com.Parameters.AddWithValue("@name", obj.name);
-                com.Parameters.AddWithValue("@salary", obj.salary);
-                com.Parameters.AddWithValue("@gender", obj.gender);
-                com.Parameters.AddWithValue("@Department", obj.Department);
+                com.Parameters.AddWithValue("@name", name);
+                com.Parameters.AddWithValue("@start", start);
+                com.Parameters.AddWithValue("@salary",salary);
+                com.Parameters.AddWithValue("@gender", gender);
+                
                 con.Open();
                 int i = com.ExecuteNonQuery();
                 con.Close();

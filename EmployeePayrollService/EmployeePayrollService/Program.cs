@@ -12,13 +12,16 @@ namespace EmployeePayrollService
             while (flag)
             {
                 Console.WriteLine("Select the number which is to be executed \n 1.ADD \n 2.Delete \n 3.Update  \n 4.View \n 5.Exit");
+
                 int choice = Convert.ToInt32(Console.ReadLine());
+
                 PayRollSqlConnection paysql = new PayRollSqlConnection();
+                EmpPayrollModel model = new EmpPayrollModel();
+
                 switch (choice)
                 {
                     case 1:
-                        EmpPayrollModel model = new EmpPayrollModel();
-                     
+                   
                         model.name = "Ritesh";
                         model.start = DateTime.Now;
                         model.salary = 80000;
@@ -52,6 +55,14 @@ namespace EmployeePayrollService
 
 
                     case 3:
+                        string name = "Nitesh";
+                        DateTime start = DateTime.Now;
+                        float salary = 95000;                  // It Will Updating the thing described
+                        char gender = 'M'; 
+                        paysql.UpdateEmployee(name, start, salary, gender);
+                        break;
+
+                    case 4:
                         flag = false;
                         break;
                 }
