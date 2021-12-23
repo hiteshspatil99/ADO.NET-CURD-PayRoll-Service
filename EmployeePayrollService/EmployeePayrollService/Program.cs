@@ -49,7 +49,7 @@ namespace EmployeePayrollService
 
                     case 2:
                         Console.WriteLine("Enter the id To Delete Data");
-                        int num = Convert.ToInt32(Console.ReadLine());
+                        int num = Convert.ToInt32(Console.ReadLine());           //whole id row data deleting by selected id.......
                         paysql.DeleteEmployee(num);
                         break;
 
@@ -63,6 +63,11 @@ namespace EmployeePayrollService
                         break;
 
                     case 4:
+                        
+                        paysql.GetAllEmployees();                       //will display whole data according to .....
+                        break;
+
+                    case 5:
                         flag = false;
                         break;
                 }

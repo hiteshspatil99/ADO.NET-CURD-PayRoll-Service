@@ -56,45 +56,8 @@ namespace EmployeePayrollService
             }
         }
         //To view employee details with generic list     
-        public List<EmpPayrollModel> GetAllEmployees()
-        {
-            Connection();
-
-
-            SqlCommand com = new SqlCommand("GetPayrollServices", con);
-            com.CommandType = CommandType.StoredProcedure;
-            SqlDataAdapter da = new SqlDataAdapter(com);
-            DataTable data = new DataTable();
-
-            con.Open();  //open query for executing
-            da.Fill(data);
-            con.Close();  //Close query After executing
-
-            foreach (DataRow dr in data.Rows) //Bind EmpPayrollModel generic list using dataRow  
-            {
-
-                PayrollList.Add
-                    (new EmpPayrollModel
-                    {
-
-                        name = Convert.ToString(dr["name"]),
-                        salary = (float)Convert.ToDouble(dr["salary"]),
-                        start = Convert.ToDateTime(dr["start"]),
-                        gender = Convert.ToChar(dr["gender"]),
-                        PhoneNo = Convert.ToDouble(dr["PhoneNo"]),
-                        OfficeAddress = Convert.ToString(dr["OfficeAddress"]),
-                        Department = Convert.ToString(dr["Department"]),
-                        BasicPay = Convert.ToDouble(dr["BasicPay"]),
-                        Deductions = Convert.ToDouble(dr["Deductions"]),
-                        TaxablePay = Convert.ToDouble(dr["Taxablepay"]),
-                        IncomeTax = Convert.ToDouble(dr["IncomeTax"]),
-                        NetPay = Convert.ToDouble(dr["NetPay"]),
-                    }
-                    );
-            }
-
-            return PayrollList;
-        }
+        
+        
         //To Update Employee details    
         public bool UpdateEmployee(string name, DateTime start,float salary, char gender)
         {
@@ -106,7 +69,7 @@ namespace EmployeePayrollService
                 com.CommandType = CommandType.StoredProcedure;
                 com.Parameters.AddWithValue("@name", name);
                 com.Parameters.AddWithValue("@start", start);
-                com.Parameters.AddWithValue("@salary",salary);
+                com.Parameters.AddWithValue("@salary", salary);
                 com.Parameters.AddWithValue("@gender", gender);
                 
                 con.Open();
@@ -128,6 +91,7 @@ namespace EmployeePayrollService
                 throw new Exception(e.Message);
             }
         }
+
         //To Delete Employee details    
         public bool DeleteEmployee(int id)
         {
@@ -158,13 +122,41 @@ namespace EmployeePayrollService
                 throw new Exception(e.Message);
             }
         }
-        public void Display()
+        public DataSet   GetAllEmployees()
         {
-            foreach (var item in PayrollList)
+            try
             {
-                Console.WriteLine("\n name \t BasicPay \t \t start \t gender");
-                Console.WriteLine(item.name + "\t" + item.BasicPay + "\t" + item.start + "\t" + item.gender);
+                Connection();
+                SqlCommand com = new SqlCommand("GetPayrollServices", con);
+
+                com.CommandType = CommandType.StoredProcedure;
+                DataSet dataSet = new DataSet();
+                SqlDataAdapter adapter = new SqlDataAdapter("GetPayrollServices", this.con);
+                adapter.Fill(dataSet, "employee_payroll");
+
+                foreach (DataRow dr in dataSet.Tables["employee_payroll"].Rows)
+                {
+                    Console.WriteLine("\t" + dr["id"] + " " + dr["name"] + " " + dr["salary"] +
+                        " " + dr["start"] + " " + dr["gender"] + " " + dr["PhoneNo"] +
+                         dr["OfficeAddress"] + " " + dr["Department"] + " " + dr["BasicPay"] + " " + dr["Deductions"] +
+                        " " + dr["TaxablePay"] + " " + dr["IncomeTax"] + " " + dr["NetPay"]); //.(1)(2)(3)(4)(5)(6)(7)(8));
+                }
+                con.Close();
+                return dataSet;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
             }
         }
+        //public void Display()
+        //{
+        //    foreach (var item in PayrollList)
+        //    {
+        //        Console.WriteLine("\n name \t salary \t \t start \t gender");
+
+        //        Console.WriteLine(item.name + "\t" + item.salary + "\t" + item.start + "\t" + item.gender);
+        //    }
+        //}
     }
 }
